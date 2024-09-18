@@ -29,6 +29,7 @@ function CreateNewContext(props: PROPS) {
 
   const [aiOutput, setAiOutput] = useState<string>("");
   const { user } = useUser();
+
   const GeneratedAiContent = async (formData: any) => {
     setLoading(true);
     const SelectedPrompt = selectedTemplate?.aiPrompt;
@@ -36,7 +37,7 @@ function CreateNewContext(props: PROPS) {
     const FinalAiPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
 
     const result = await chatSession.sendMessage(FinalAiPrompt);
-
+   
     setAiOutput(result?.response.text());
     await SaveInDb(
       JSON.stringify(formData),
@@ -54,7 +55,7 @@ function CreateNewContext(props: PROPS) {
       createdBy: user?.primaryEmailAddress?.emailAddress,
       createdAt: moment().format("DD/MM/YYYY"),
     });
-    console.log(result)
+    console.log(result);
   };
 
   return (
