@@ -23,21 +23,21 @@ export default [
   },
   {
     name: "Youtube Tags",
-    desc: "An AI tool that Generate blog title depends on your blog information",
+    desc: "An AI tool that Generate youtube tags depends on your video description information",
     category: "Youtube Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/10884/10884883.png",
     aiPrompt:
-      "Give me 5 blog idea in bullet wise only based on give niche & Outline topic give me result in Rich text editor format",
+      "Give me 5 youtube tags that helps me to better reach to audience related with tags",
     slug: "youtube-tag",
     form: [
       {
-        label: "Enter Your Blog niche",
+        label: "Enter Your Tag niche",
         field: "input",
         name: "niche",
         required: true,
       },
       {
-        label: "Enter Blog Outline",
+        label: "Enter Youtube Tag Outline",
         field: "textarea",
         name: "outline",
       },
