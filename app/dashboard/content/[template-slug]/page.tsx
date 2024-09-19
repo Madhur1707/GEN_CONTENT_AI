@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormSection from "../_components/FormSection";
 import OutputSection from "../_components/OutputSection";
 import Templates from "@/app/(data)/Templates";
@@ -12,6 +12,7 @@ import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
+import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 
 interface PROPS {
   params: {
@@ -29,15 +30,20 @@ function CreateNewContext(props: PROPS) {
 
   const [aiOutput, setAiOutput] = useState<string>("");
   const { user } = useUser();
+  const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
 
   const GeneratedAiContent = async (formData: any) => {
+    if (totalUsage >= 10000) {
+      console.log("Please Upgrade");
+      return;
+    }
     setLoading(true);
     const SelectedPrompt = selectedTemplate?.aiPrompt;
 
     const FinalAiPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
 
     const result = await chatSession.sendMessage(FinalAiPrompt);
-   
+
     setAiOutput(result?.response.text());
     await SaveInDb(
       JSON.stringify(formData),

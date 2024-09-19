@@ -1,14 +1,15 @@
 "use client";
+import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 function UsageTrack() {
   const { user } = useUser();
-  const [totalUsage, setTotalUsage] = useState<number>(0);
+  const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
 
   useEffect(() => {
     user && GetData();
@@ -18,15 +19,17 @@ function UsageTrack() {
     const result = await db
       .select()
       .from(AIOutput)
-      .where(eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress));
+      .where(
+        eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress ?? "")
+      );
 
     GetTotalUsage(result);
   };
 
-  const GetTotalUsage = (result: any) => {
+  const GetTotalUsage = (result: { aiResponse: string | null }[]) => {
     let total: number = 0;
     result.forEach((element) => {
-      total = total + Number(element.aiResponse?.length);
+      total += element.aiResponse ? element.aiResponse.length : 0;
     });
 
     setTotalUsage(total);
