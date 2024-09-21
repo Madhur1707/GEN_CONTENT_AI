@@ -38,7 +38,8 @@ function SideNav() {
   return (
     <div className="h-screen relative p-5 shadow-sm border bg-white">
       <div className="flex justify-center ">
-        <Image src={"/logo.svg"} alt="logo" width={150} height={150} />
+        <span className="text-3xl font-bold">Quanta AI</span>
+        {/* <Image src={"/logo2.png"} alt="logo" width={100} height={100} /> */}
       </div>
       <hr className="my-8 border" />
       <div className="mt-3">
