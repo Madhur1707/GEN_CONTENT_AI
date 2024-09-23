@@ -10,7 +10,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <header className="w-full flex items-center justify-between p-6 bg-white shadow">
-        <div className="text-2xl font-bold">LOGO</div>
+        <div className="text-2xl font-bold">
+        <span className="text-3xl font-bold">Quanta AI</span>
+        </div>
         <div className="ml-auto">
           {isSignedIn ? (
             <Button onClick={() => router.push("/dashboard")}>Dashboard</Button>

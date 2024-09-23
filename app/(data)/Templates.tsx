@@ -45,6 +45,76 @@ export default [
     ],
   },
   {
+    name: "Tagline Generator",
+    desc: "Generates creative taglines for your brand or business.",
+    category: "Branding Tool",
+    icon: "https://cdn-icons-png.flaticon.com/128/12472/12472467.png",
+    aiPrompt:
+      "Generate 5 catchy taglines for a [business type] that target [audience].",
+    slug: "Tagline-Generator",
+    form: [
+      {
+        label: "Enter Business Type",
+        field: "input",
+        name: "business",
+        required: true,
+      },
+      {
+        label: "Enter Target Audience",
+        field: "input",
+        name: "audience",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Blog Generator",
+    desc: "Generates blog content based on your niche and outline.",
+    category: "Content Creation Tool",
+    icon: "https://cdn-icons-png.flaticon.com/128/3669/3669967.png",
+    aiPrompt:
+      "Generate a blog post in [niche] based on the following outline: [outline].",
+    slug: "Blog-Generator",
+    form: [
+      {
+        label: "Enter Blog Niche",
+        field: "input",
+        name: "niche",
+        required: true,
+      },
+      {
+        label: "Enter Blog Outline",
+        field: "textarea",
+        name: "outline",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Landing Page Headline",
+    desc: "Generates attention-grabbing headlines for landing pages.",
+    category: "Landing Page Tool",
+    icon: "https://cdn-icons-png.flaticon.com/128/7624/7624299.png",
+    aiPrompt:
+      "Generate 3 compelling headlines for a landing page targeting [audience] for [product/service].",
+    slug: "Landing-Page-Headline-Generator",
+    form: [
+      {
+        label: "Enter Product/Service",
+        field: "input",
+        name: "niche",
+        required: true,
+      },
+      {
+        label: "Enter Target Audience",
+        field: "input",
+        name: "outline",
+        required: true,
+      },
+    ],
+  },
+
+  {
     name: "Youtube Tags",
     desc: "Generate youtube tags depends on your video description information",
     category: "Youtube Tool",
@@ -70,7 +140,7 @@ export default [
     name: "Instagram Post",
     desc: "An AI tool that Generate Instagram Post depends on your information",
     category: "Instagram Tool",
-    icon: "https://cdn-icons-png.flaticon.com/128/3161/3161837.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/733/733558.png",
     aiPrompt:
       "Give me 5 blog idea in bullet wise only based on give niche & Outline topic give me result in Rich text editor format",
     slug: "Insta-Post",
@@ -87,5 +157,28 @@ export default [
         name: "outline",
       },
     ],
-  }
-]
+  },
+  {
+    name: "Product Description Generator",
+    desc: "Generates product descriptions for e-commerce or landing pages.",
+    category: "E-commerce Tool",
+    icon: "https://cdn-icons-png.flaticon.com/128/3502/3502601.png",
+    aiPrompt:
+      "Generate a product description for a [product] that appeals to [target audience] and highlights [product type].",
+    slug: "Product-Description-Generator",
+    form: [
+      {
+        label: "Enter Product Name",
+        field: "input",
+        name: "product",
+        required: true,
+      },
+      {
+        label: "Enter Target Audience",
+        field: "input",
+        name: "audience",
+        required: true,
+      },
+    ],
+  },
+];
