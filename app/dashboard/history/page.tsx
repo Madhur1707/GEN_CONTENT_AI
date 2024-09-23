@@ -1,37 +1,104 @@
+"use client"; // Ensure this is a Client Component
+
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
-
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Copy } from "lucide-react";
+import { useState } from "react";
+import Templates from "@/app/(data)/Templates";
 
 interface AIOutputType {
-    id: number;
-    formData: string | null;
-    aiResponse: string | null;
-    templateSlug: string;
-    createdBy: string | null;
-    createdAt: string | null;
+  id: number;
+  formData: string | null;
+  aiResponse: string | null;
+  templateSlug: string;
+  createdBy: string | null;
+  createdAt: string | null;
 }
 
-
 const History = async () => {
+  const data: AIOutputType[] = await db.select().from(AIOutput);
 
-    const data: AIOutputType[] = await db.select().from(AIOutput);
+  const HistoryClient = ({ data }: { data: AIOutputType[] }) => {
+    const [copied, setCopied] = useState<number | null>(null);
+
+    const handleCopy = (text: string | null, id: number) => {
+      if (text) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            setCopied(id);
+            setTimeout(() => setCopied(null), 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to copy:", err);
+          });
+      }
+    };
+
+    const getTemplateIcon = (slug: string) => {
+      const template = Templates.find((t) => t.slug === slug);
+      return template?.icon || "/default-icon.png";
+    };
 
     return (
+      <div className="p-10">
+        <h1 className="text-2xl font-bold mb-5">History</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data.map((item) => (
+            <Card
+              key={item.id}
+              className="p-5 shadow-lg rounded-lg border bg-white hover:shadow-xl transition-shadow duration-200 flex flex-col cursor-pointer"
+            >
+              <CardHeader className="flex items-center space-x-4">
+                <img
+                  src={getTemplateIcon(item.templateSlug)}
+                  alt={item.templateSlug}
+                  className="w-12 h-12 rounded-lg object-cover items-center shadow-sm"
+                />
+                <div>
+                  <CardTitle className="text-xl text-center font-semibold">
+                    {item.templateSlug || "Unknown Template"}
+                  </CardTitle>
+                  <p className="text-sm text-center text-gray-500">
+                    {item.createdAt || "N/A"}
+                  </p>
+                </div>
+              </CardHeader>
 
-        <div className="p-10">
-            <h1 className="text-2xl font-bold">History</h1>
-            <div className="mt-5 grid grid-cols-1 gap-5">
-                {data.map((item) => (
-                    <div key={item.id} className="border p-5 rounded-lg shadow-md">
-                        <p className="text-sm text-gray-500">{item.createdAt || "N/A"}</p>
-                        <p className="font-semibold">{item.templateSlug}</p>
-                        <p>{item.aiResponse ? item.aiResponse.slice(0, 100) : "No response"}...</p>
-                    </div>
-                ))}
-            </div>
+              <CardContent className="space-y-4 mt-4 text-justify">
+                <div className="bg-gray-100 p-3 rounded-lg text-gray-700 text-base">
+                  <span className="font-semibold text-lg">AI Response: </span>
+                  {item.aiResponse
+                    ? `${item.aiResponse.slice(0, 100)}...`
+                    : "No response"}
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-gray-700 text-base">
+                    <span className="font-semibold">Words: </span>
+                    {item.aiResponse ? item.aiResponse.split(" ").length : 0}
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-blue-500 flex items-center gap-2 hover:bg-blue-50 transition-colors duration-200"
+                    onClick={() => handleCopy(item.aiResponse, item.id)}
+                  >
+                    <Copy className="w-5 h-5" />{" "}
+                    {copied === item.id ? "Copied!" : "Copy"}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
+      </div>
     );
+  };
+
+  return <HistoryClient data={data} />;
 };
 
 export default History;

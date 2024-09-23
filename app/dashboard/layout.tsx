@@ -13,7 +13,7 @@ function layout({
 
   return (
     <TotalUsageContext.Provider value={{ totalUsage, setTotalUsage }}>
-      <div className="bg-slate-100 h-screen">
+      <div className="bg-slate-100 w-full">
         <div className="md:w-64 hidden md:block fixed">
           <SideNav />
         </div>

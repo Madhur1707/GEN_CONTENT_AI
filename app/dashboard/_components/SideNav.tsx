@@ -1,6 +1,5 @@
 "use client";
 import { FileClock, Home, Settings, WalletCards } from "lucide-react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 import UsageTrack from "./UsageTrack";
@@ -19,14 +18,14 @@ function SideNav() {
       path: "/dashboard/history",
     },
     {
-      name: "Billing",
-      icon: WalletCards,
-      path: "/dashboard/billing",
-    },
-    {
       name: "Setting",
       icon: Settings,
       path: "/dashboard/setting",
+    },
+    {
+      name: "Billing",
+      icon: WalletCards,
+      path: "/dashboard/billing",
     },
   ];
 
