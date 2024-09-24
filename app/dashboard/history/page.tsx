@@ -75,13 +75,58 @@ const History = () => {
     return (
       <div className="flex justify-center items-center h-screen bg-white">
         <div className="text-center">
-          <Image src={"/loader.svg"} alt="loading..." width={100} height={100} />
+          <Image
+            src={"/loader.svg"}
+            alt="loading..."
+            width={100}
+            height={100}
+          />
           <p className="mt-2 text-xl font-semibold">Loading...</p>
         </div>
       </div>
     );
-  if (error) return <div>{error}</div>;
-  if (data.length === 0) return <div>No history available.</div>;
+
+  if (error) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          textAlign: "center",
+        }}
+      >
+        <CardContent>
+          <span role="img" aria-label="error" style={{ fontSize: "2rem" }}>
+            ⚠️
+          </span>
+          <div>{error}</div>
+        </CardContent>
+      </div>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          textAlign: "center",
+        }}
+      >
+        <CardContent>
+          <span role="img" aria-label="no history" style={{ fontSize: "2rem" }}>
+            📜
+          </span>
+          <div>No History Available..</div>
+        </CardContent>
+      </div>
+    );
+  }
 
   return (
     <div className="p-10">
