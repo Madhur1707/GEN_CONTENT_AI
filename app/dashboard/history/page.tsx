@@ -1,12 +1,14 @@
 "use client"; // Ensure this is a Client Component
-
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Templates from "@/app/(data)/Templates";
+import { useUser } from "@clerk/nextjs";
+import { eq } from "drizzle-orm";
+import Image from "next/image";
 
 interface AIOutputType {
   id: number;
@@ -17,88 +19,124 @@ interface AIOutputType {
   createdAt: string | null;
 }
 
-const History = async () => {
-  const data: AIOutputType[] = await db.select().from(AIOutput);
+const History = () => {
+  const { user } = useUser();
+  const [data, setData] = useState<AIOutputType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState<number | null>(null);
 
-  const HistoryClient = ({ data }: { data: AIOutputType[] }) => {
-    const [copied, setCopied] = useState<number | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user) return;
+      try {
+        const result: AIOutputType[] = await db
+          .select()
+          .from(AIOutput)
+          .where(
+            eq(
+              AIOutput.createdBy,
+              user?.primaryEmailAddress?.emailAddress ?? ""
+            )
+          );
 
-    const handleCopy = (text: string | null, id: number) => {
-      if (text) {
-        navigator.clipboard
-          .writeText(text)
-          .then(() => {
-            setCopied(id);
-            setTimeout(() => setCopied(null), 2000);
-          })
-          .catch((err) => {
-            console.error("Failed to copy:", err);
-          });
+        setData(result);
+      } catch (err) {
+        setError("Failed to load history.");
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
 
-    const getTemplateIcon = (slug: string) => {
-      const template = Templates.find((t) => t.slug === slug);
-      return template?.icon || "/default-icon.png";
-    };
+    fetchData();
+  }, [user]);
 
+  const handleCopy = (text: string | null, id: number) => {
+    if (text) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          setCopied(id);
+          setTimeout(() => setCopied(null), 2000);
+        })
+        .catch((err) => {
+          console.error("Failed to copy:", err);
+        });
+    }
+  };
+
+  const getTemplateIcon = (slug: string) => {
+    const template = Templates.find((t) => t.slug === slug);
+    return template?.icon || "/default-icon.png";
+  };
+
+  if (loading)
     return (
-      <div className="p-10">
-        <h1 className="text-2xl font-bold mb-5">History</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.map((item) => (
-            <Card
-              key={item.id}
-              className="p-5 shadow-lg rounded-lg border bg-white hover:shadow-xl transition-shadow duration-200 flex flex-col cursor-pointer"
-            >
-              <CardHeader className="flex items-center space-x-4">
-                <img
-                  src={getTemplateIcon(item.templateSlug)}
-                  alt={item.templateSlug}
-                  className="w-12 h-12 rounded-lg object-cover items-center shadow-sm"
-                />
-                <div>
-                  <CardTitle className="text-xl text-center font-semibold">
-                    {item.templateSlug || "Unknown Template"}
-                  </CardTitle>
-                  <p className="text-sm text-center text-gray-500">
-                    {item.createdAt || "N/A"}
-                  </p>
-                </div>
-              </CardHeader>
-
-              <CardContent className="space-y-4 mt-4 text-justify">
-                <div className="bg-gray-100 p-3 rounded-lg text-gray-700 text-base">
-                  <span className="font-semibold text-lg">AI Response: </span>
-                  {item.aiResponse
-                    ? `${item.aiResponse.slice(0, 100)}...`
-                    : "No response"}
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="text-gray-700 text-base">
-                    <span className="font-semibold">Words: </span>
-                    {item.aiResponse ? item.aiResponse.split(" ").length : 0}
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-blue-500 flex items-center gap-2 hover:bg-blue-50 transition-colors duration-200"
-                    onClick={() => handleCopy(item.aiResponse, item.id)}
-                  >
-                    <Copy className="w-5 h-5" />{" "}
-                    {copied === item.id ? "Copied!" : "Copy"}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+      <div className="flex justify-center items-center h-screen bg-white">
+        <div className="text-center">
+          <Image src={"/loader.svg"} alt="loading..." width={100} height={100} />
+          <p className="mt-2 text-xl font-semibold">Loading...</p>
         </div>
       </div>
     );
-  };
+  if (error) return <div>{error}</div>;
+  if (data.length === 0) return <div>No history available.</div>;
 
-  return <HistoryClient data={data} />;
+  return (
+    <div className="p-10">
+      <h1 className="text-2xl font-bold mb-5">History</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {data.map((item) => (
+          <Card
+            key={item.id}
+            className="p-5 shadow-lg rounded-lg border bg-white hover:shadow-xl transition-shadow duration-200 flex flex-col cursor-pointer"
+          >
+            <CardHeader className="flex items-center space-x-4">
+              <img
+                src={getTemplateIcon(item.templateSlug)}
+                alt={item.templateSlug}
+                className="w-12 h-12 rounded-lg object-cover items-center shadow-sm"
+              />
+              <div>
+                <CardTitle className="text-xl text-center font-semibold">
+                  {item.templateSlug || "Unknown Template"}
+                </CardTitle>
+                <p className="text-sm text-center text-gray-500">
+                  {item.createdAt || "N/A"}
+                </p>
+              </div>
+            </CardHeader>
+
+            <CardContent className="space-y-4 mt-4 text-justify">
+              <div className="bg-gray-100 p-3 rounded-lg text-gray-700 text-base">
+                <span className="font-semibold text-lg">AI Response: </span>
+                {item.aiResponse
+                  ? `${item.aiResponse.slice(0, 100)}...`
+                  : "No response"}
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="text-gray-700 text-base">
+                  <span className="font-semibold">Words: </span>
+                  {item.aiResponse ? item.aiResponse.split(" ").length : 0}
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-blue-500 flex items-center gap-2 hover:bg-blue-50 transition-colors duration-200"
+                  onClick={() => handleCopy(item.aiResponse, item.id)}
+                >
+                  <Copy className="w-5 h-5" />
+                  {copied === item.id ? "Copied!" : "Copy"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default History;
