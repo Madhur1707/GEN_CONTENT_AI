@@ -1,14 +1,15 @@
-"use client"; // Ensure this is a Client Component
+"use client";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
+import { Copy, Trash } from "lucide-react";
 import { useState, useEffect } from "react";
 import Templates from "@/app/(data)/Templates";
 import { useUser } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
 import Image from "next/image";
+import DeleteHistory from "./_components/DeleteHistory";
 
 interface AIOutputType {
   id: number;
@@ -40,7 +41,13 @@ const History = () => {
             )
           );
 
-        setData(result);
+        const sortedResult = result.sort((a, b) => {
+          const parseDate = (date: string) =>
+            new Date(date.split("/").reverse().join("-")).getTime();
+          return parseDate(b.createdAt || "") - parseDate(a.createdAt || "");
+        });
+
+        setData(sortedResult);
       } catch (err) {
         setError("Failed to load history.");
         console.error(err);
@@ -63,6 +70,16 @@ const History = () => {
         .catch((err) => {
           console.error("Failed to copy:", err);
         });
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await db.delete(AIOutput).where(eq(AIOutput.id, id));
+
+      setData((prevData) => prevData.filter((item) => item.id !== id));
+    } catch (err) {
+      console.error("Failed to delete item:", err);
     }
   };
 
@@ -135,7 +152,7 @@ const History = () => {
         {data.map((item) => (
           <Card
             key={item.id}
-            className="p-5 shadow-lg rounded-lg border bg-white hover:shadow-xl transition-shadow duration-200 flex flex-col cursor-pointer"
+            className=" shadow-lg rounded-lg border bg-white hover:shadow-xl transition-shadow duration-200 flex flex-col cursor-pointer"
           >
             <CardHeader className="flex items-center space-x-4">
               <img
@@ -155,7 +172,9 @@ const History = () => {
 
             <CardContent className="space-y-4 mt-4 text-justify">
               <div className="bg-gray-100 p-3 rounded-lg text-gray-700 text-base">
-                <span className="font-semibold text-lg">AI Response: </span>
+                <span className="font-semibold text-lg">
+                  Generated Result:{" "}
+                </span>
                 {item.aiResponse
                   ? `${item.aiResponse.slice(0, 100)}...`
                   : "No response"}
@@ -175,6 +194,11 @@ const History = () => {
                   <Copy className="w-5 h-5" />
                   {copied === item.id ? "Copied!" : "Copy"}
                 </Button>
+
+                {/* DELETE HISTORY COMPONENT  */}
+
+                <DeleteHistory id={item.id} onDelete={handleDelete} />
+                {/* DELETE HISTORY COMPONENT  */}
               </div>
             </CardContent>
           </Card>

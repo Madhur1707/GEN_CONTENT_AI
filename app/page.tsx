@@ -26,7 +26,7 @@ export default function Home() {
 
       <main className="flex-1 flex flex-col items-center justify-center bg-gray-50 text-center px-4">
         <h1 className="text-5xl font-bold mt-4 mb-5">
-          AI Content <span className="text-blue-600">Generator</span>
+          AI Content <span className="text-primary">Generator</span>
         </h1>
         <p className="text-lg text-gray-700 mb-6">
           Revolutionize your content creation with our AI-powered app,
