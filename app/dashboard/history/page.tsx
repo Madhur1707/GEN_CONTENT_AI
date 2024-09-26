@@ -158,10 +158,10 @@ const History = () => {
               <img
                 src={getTemplateIcon(item.templateSlug)}
                 alt={item.templateSlug}
-                className="w-12 h-12 rounded-lg object-cover items-center shadow-sm"
+                className="w-10 h-10 rounded-lg object-cover items-center shadow-sm"
               />
               <div>
-                <CardTitle className="text-xl text-center font-semibold">
+                <CardTitle className="text-lg text-center font-semibold">
                   {item.templateSlug || "Unknown Template"}
                 </CardTitle>
                 <p className="text-sm text-center text-gray-500">
@@ -170,14 +170,16 @@ const History = () => {
               </div>
             </CardHeader>
 
-            <CardContent className="space-y-4 mt-4 text-justify">
+            <CardContent className="space-y-4 mt- text-justify">
               <div className="bg-gray-100 p-3 rounded-lg text-gray-700 text-base">
                 <span className="font-semibold text-lg">
                   Generated Result:{" "}
+                  <span className="text-sm">
+                    {item.aiResponse
+                      ? `${item.aiResponse.slice(0, 100)}...`
+                      : "No response"}
+                  </span>
                 </span>
-                {item.aiResponse
-                  ? `${item.aiResponse.slice(0, 100)}...`
-                  : "No response"}
               </div>
 
               <div className="flex items-center justify-between">
