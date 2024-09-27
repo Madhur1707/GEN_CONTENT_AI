@@ -93,7 +93,7 @@ const History = () => {
       <div className="flex justify-center items-center h-screen bg-white">
         <div className="text-center">
           <Image
-            src={"/loader.svg"}
+            src={"/nloader.svg"}
             alt="loading..."
             width={100}
             height={100}

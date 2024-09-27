@@ -13,13 +13,11 @@ function Header({ toggleMenu }: { toggleMenu: () => void }) {
       </div>
       <span className=" text-xl font-bold md:hidden">Quanta AI</span>
 
-    
       <div className="hidden md:flex gap-2 bg-white items-center p-2 border rounded-md max-w-md">
         <Search />
         <input className="outline-none" type="text" placeholder="Search...." />
       </div>
 
-  
       <div className="flex gap-5">
         <h2 className="bg-primary p-1 rounded-full text-xs text-white px-2 hidden md:block">
           🔥 Join Membership just for $9.99/Month

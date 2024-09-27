@@ -1,5 +1,11 @@
 "use client";
-import { FileClock, Home, Settings, WalletCards } from "lucide-react";
+import {
+  FileClock,
+  Home,
+  Settings,
+  Signature,
+  WalletCards,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 import UsageTrack from "./UsageTrack";
@@ -11,6 +17,11 @@ function SideNav({ onMenuClick }: { onMenuClick?: () => void }) {
       name: "Home",
       icon: Home,
       path: "/dashboard",
+    },
+    {
+      name: "E-Signature",
+      icon: Signature,
+      path: "/dashboard/esignature",
     },
     {
       name: "History",

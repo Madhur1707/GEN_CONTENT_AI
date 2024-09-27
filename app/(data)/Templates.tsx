@@ -1,21 +1,21 @@
 export default [
   {
     name: "Youtube SEO Title",
-    desc: "An AI tool that Generate blog title depends on your blog information",
+    desc: "Generate youtube seo title depends on your video information",
     category: "Youtube Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/400/400426.png",
     aiPrompt:
-      "Give me 5 blog idea in bullet wise only based on give niche & Outline topic give me result in Rich text editor format",
+      "Give me some titles for my video which is suitable according youtube seo.",
     slug: "Youtube-Seo-Title",
     form: [
       {
-        label: "Enter Your Blog niche",
+        label: "Enter Your Video niche",
         field: "input",
         name: "niche",
         required: true,
       },
       {
-        label: "Enter Blog Outline",
+        label: "Enter video Outline",
         field: "textarea",
         name: "outline",
       },
