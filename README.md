@@ -11,4 +11,28 @@ This is a React.js and Next.js web application that generates AI-based content t
 
 * Responsive Design: Built using TailwindCSS and Shadcn UI, the app is fully responsive for both small and large screens.
 
+
+## Technologies Used
+
+*  Next.js: The React framework used for building the application.
   
+*  TypeScript: For static type-checking and robust development.
+   
+* Clerk: Used for handling user authentication.
+  
+*  Gemini AI: For generating AI-based content.
+
+* TailwindCSS: For styling and ensuring the app is responsive and visually appealing.
+  
+* Shadcn UI: Used to build reusable and customizable UI components.
+  
+* PostgreSQL: Database used for storing generated content and user data.
+  
+* Drizzle ORM: An ORM for working with the PostgreSQL database.
+
+
+##  Contribution
+Feel free to fork the project, create a feature branch, and submit a pull request if you would like to contribute to this project.
+
+## Live Demo : [https://quanta-ai-two.vercel.app/]
+
