@@ -34,5 +34,5 @@ This is a React.js and Next.js web application that generates AI-based content t
 ##  Contribution
 Feel free to fork the project, create a feature branch, and submit a pull request if you would like to contribute to this project.
 
-## Live Demo : [https://quanta-ai-two.vercel.app/]
+## Live Demo : https://quanta-ai-two.vercel.app/
 
