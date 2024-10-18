@@ -63,7 +63,7 @@ export default function Home() {
       </main>
 
       <footer className="p-4 bg-gray-100 text-center">
-        © 2024 Your Company Name
+        © Quanta | Generative Content AI
       </footer>
     </div>
   );
