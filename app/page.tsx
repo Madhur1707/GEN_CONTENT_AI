@@ -3,7 +3,7 @@ import { SignInButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Cpu, Layout, Smile, PhoneCall, Github, User2, X } from "lucide-react";
-import { Twitter, Instagram, Linkedin } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 export default function Home() {
   const { isSignedIn } = useUser();
@@ -115,13 +115,14 @@ export default function Home() {
                 href="https://www.linkedin.com/in/madhurpathak/"
                 aria-label="LinkedIn"
                 className="text-gray-700 hover:text-black"
+                target="blank"
               >
                 <Linkedin className="h-6 w-6" />
               </a>
               <a
                 href="https://x.com/Madhur_Pathak07"
                 aria-label="X"
-                className="text-gray-700 hover:text-black"
+                className="text-gray-700 hover:text-black"   target="blank"
               >
                 <X className="h-6 w-6" />
               </a>
@@ -129,13 +130,17 @@ export default function Home() {
                 href="https://madhurpathak.netlify.app/"
                 aria-label="Portfolio"
                 className="text-gray-700 hover:text-black"
+
+                
+                    target="blank"
+
               >
                 <User2 className="h-6 w-6" />
               </a>
               <a
                 href="https://github.com/Madhur1707"
                 aria-label="Github"
-                className="text-gray-700 hover:text-black"
+                className="text-gray-700 hover:text-black"   target="blank"
               >
                 <Github className="h-6 w-6" />
               </a>

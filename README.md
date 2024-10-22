@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quanta-AI Generative Content Web Application
 
-## Getting Started
+This is a React.js and Next.js web application that generates AI-based content tailored to user prompts. The app uses Gemini AI for content generation and allows users to generate specific content based on the niche of the provided keywords. Additionally, this app has e-signature functionality that lets users upload and sign documents directly within the application.
 
-First, run the development server:
+##  Features
+*  AI Content Generation: Users can input a prompt, and the app generates content using Gemini AI. The content is tailored to specific keywords or niches.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* Authentication: User authentication is managed through Clerk, ensuring a secure and personalized user experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Content History: Users can view the history of their generated content.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Responsive Design: Built using TailwindCSS and Shadcn UI, the app is fully responsive for both small and large screens.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+*  Next.js: The React framework used for building the application.
+  
+*  TypeScript: For static type-checking and robust development.
+   
+* Clerk: Used for handling user authentication.
+  
+*  Gemini AI: For generating AI-based content.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* TailwindCSS: For styling and ensuring the app is responsive and visually appealing.
+  
+* Shadcn UI: Used to build reusable and customizable UI components.
+  
+* PostgreSQL: Database used for storing generated content and user data.
+  
+* Drizzle ORM: An ORM for working with the PostgreSQL database.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+##  Contribution
+Feel free to fork the project, create a feature branch, and submit a pull request if you would like to contribute to this project.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Live Demo : https://quanta-ai-two.vercel.app/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
