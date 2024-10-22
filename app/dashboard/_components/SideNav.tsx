@@ -49,7 +49,6 @@ function SideNav({ onMenuClick }: { onMenuClick?: () => void }) {
     <div className="h-screen relative p-2 shadow-sm border bg-white">
       <div className="flex justify-center ">
         <span className="text-3xl font-bold">Quanta AI</span>
-        {/* <Image src={"/logo2.png"} alt="logo" width={100} height={100} /> */}
       </div>
       <hr className="my-7 border" />
       <div className="mt-3">
