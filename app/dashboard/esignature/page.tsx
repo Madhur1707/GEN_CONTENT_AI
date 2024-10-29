@@ -20,7 +20,7 @@ function Esignature() {
         <CardHeader>
           <h1 className="text-3xl font-bold mb-2">E-Sign Document</h1>
           <p className="text-sm text-muted-foreground">
-            Upload your document and sign it electronically.
+            Upload your document and sign it.
           </p>
         </CardHeader>
         <CardContent>
