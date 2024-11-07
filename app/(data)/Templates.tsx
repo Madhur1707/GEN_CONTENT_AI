@@ -1,7 +1,74 @@
 export default [
   {
+    name: "Welcome Email Generator",
+    desc: "Create personalized welcome emails for new subscribers.",
+    category: "Email Marketing Tool",
+    icon: "https://cdn-icons-png.flaticon.com/128/18091/18091020.png",
+    aiPrompt:
+      "Generate a welcoming email for new [subscribers/customers] joining [platform or service].",
+    slug: "Welcome-Email-Generator",
+    form: [
+      {
+        label: "Enter Platform/Service Name",
+        field: "input",
+        name: "platform",
+        required: true,
+      },
+      {
+        label: "Enter Key Features/Benefits",
+        field: "textarea",
+        name: "features",
+      },
+    ],
+  },
+  {
+    name: "Cold Email Generator",
+    desc: "Create personalized cold emails for Services.",
+    category: "Email Tool",
+    icon: "https://cdn-icons-png.flaticon.com/128/3829/3829119.png",
+    aiPrompt:
+      "Generate a personalized cold email for [target audience] with [product/service].",
+    slug: "Cold-Email-Generator",
+    form: [
+      {
+        label: "Enter Product/Service",
+        field: "input",
+        name: "product",
+        required: true,
+      },
+      {
+        label: "Enter Target Audience",
+        field: "input",
+        name: "audience",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "LinkedIn Post Generator",
+    desc: "Generate professional LinkedIn posts to boost engagement.",
+    category: "LinkedIn Tool",
+    icon: "https://cdn-icons-png.flaticon.com/128/174/174857.png",
+    aiPrompt:
+      "Create a professional LinkedIn post about [topic] with key insights and calls-to-action.",
+    slug: "LinkedIn-Post-Generator",
+    form: [
+      {
+        label: "Enter Post Topic",
+        field: "input",
+        name: "topic",
+        required: true,
+      },
+      {
+        label: "Enter Key Points or Takeaways",
+        field: "textarea",
+        name: "keypoints",
+      },
+    ],
+  },
+  {
     name: "Youtube SEO Title",
-    desc: "Generate youtube seo title depends on your video information",
+    desc: "Create SEO-friendly titles for your YouTube videos.",
     category: "Youtube Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/400/400426.png",
     aiPrompt:
@@ -23,7 +90,7 @@ export default [
   },
   {
     name: "Code Generator",
-    desc: "An AI tool that generates code snippets based on your specifications.",
+    desc: "Generate code snippets based on your input.",
     category: "Development Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/7069/7069896.png",
     aiPrompt:
@@ -46,9 +113,9 @@ export default [
   },
   {
     name: "Tagline Generator",
-    desc: "Generates creative taglines for your brand or business.",
+    desc: "Create catchy taglines for your brand or business.",
     category: "Branding Tool",
-    icon: "https://cdn-icons-png.flaticon.com/128/12472/12472467.png",
+    icon: "https://cdn-icons-png.flaticon.com/128/17130/17130709.png",
     aiPrompt:
       "Generate 5 catchy taglines for a [business type] that target [audience].",
     slug: "Tagline-Generator",
@@ -69,7 +136,7 @@ export default [
   },
   {
     name: "Blog Generator",
-    desc: "Generates blog content based on your niche and outline.",
+    desc: "Generate blog content using your niche and outline.",
     category: "Content Creation Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/3669/3669967.png",
     aiPrompt:
@@ -92,7 +159,7 @@ export default [
   },
   {
     name: "Landing Page Headline",
-    desc: "Generates attention-grabbing headlines for landing pages.",
+    desc: "Create attention-grabbing headlines for landing pages.",
     category: "Landing Page Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/7624/7624299.png",
     aiPrompt:
@@ -113,10 +180,9 @@ export default [
       },
     ],
   },
-
   {
     name: "Youtube Tags",
-    desc: "Generate youtube tags depends on your video description information",
+    desc: "Generate optimized YouTube tags for better reach.",
     category: "Youtube Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/10884/10884883.png",
     aiPrompt:
@@ -138,7 +204,7 @@ export default [
   },
   {
     name: "Instagram Post",
-    desc: "An AI tool that Generate Instagram Post depends on your information",
+    desc: "Generate creative Instagram post ideas.",
     category: "Instagram Tool",
     icon: "https://cdn-icons-png.flaticon.com/128/733/733558.png",
     aiPrompt:
@@ -155,29 +221,6 @@ export default [
         label: "Enter Blog Outline",
         field: "textarea",
         name: "outline",
-      },
-    ],
-  },
-  {
-    name: "Product Description Generator",
-    desc: "Generates product descriptions for e-commerce or landing pages.",
-    category: "E-commerce Tool",
-    icon: "https://cdn-icons-png.flaticon.com/128/3502/3502601.png",
-    aiPrompt:
-      "Generate a product description for a [product] that appeals to [target audience] and highlights [product type].",
-    slug: "Product-Description-Generator",
-    form: [
-      {
-        label: "Enter Product Name",
-        field: "input",
-        name: "product",
-        required: true,
-      },
-      {
-        label: "Enter Target Audience",
-        field: "input",
-        name: "audience",
-        required: true,
       },
     ],
   },

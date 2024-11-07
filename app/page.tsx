@@ -122,7 +122,8 @@ export default function Home() {
               <a
                 href="https://x.com/Madhur_Pathak07"
                 aria-label="X"
-                className="text-gray-700 hover:text-black"   target="blank"
+                className="text-gray-700 hover:text-black"
+                target="blank"
               >
                 <X className="h-6 w-6" />
               </a>
@@ -130,17 +131,15 @@ export default function Home() {
                 href="https://madhurpathak.netlify.app/"
                 aria-label="Portfolio"
                 className="text-gray-700 hover:text-black"
-
-                
-                    target="blank"
-
+                target="blank"
               >
                 <User2 className="h-6 w-6" />
               </a>
               <a
                 href="https://github.com/Madhur1707"
                 aria-label="Github"
-                className="text-gray-700 hover:text-black"   target="blank"
+                className="text-gray-700 hover:text-black"
+                target="blank"
               >
                 <Github className="h-6 w-6" />
               </a>
